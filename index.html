@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarot Reading</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="celestial-decor" aria-hidden="true">
+    <span class="decor decor-star-1">✦</span>
+    <span class="decor decor-star-2">✧</span>
+    <span class="decor decor-star-3">⋆</span>
+    <span class="decor decor-moon">☾</span>
+    <span class="decor decor-sparkle-1">✧</span>
+    <span class="decor decor-sparkle-2">✦</span>
+  </div>
+
+  <main class="app-shell">
+    <header class="app-header">
+      <p class="eyebrow">✧ a moment for reflection ✧</p>
+      <h1>Ask the Cards</h1>
+      <p class="subtitle">A small question can open a new perspective.</p>
+    </header>
+
+    <form id="question-form" class="question-form" novalidate>
+      <label for="question-input">What's on your mind?</label>
+      <input
+        type="text"
+        id="question-input"
+        name="question"
+        placeholder="Ask your question..."
+        autocomplete="off"
+      >
+      <p id="error-message" class="error-message" role="alert" hidden></p>
+      <button type="submit" class="draw-button">Draw Cards</button>
+    </form>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <ul id="card-list" class="card-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
