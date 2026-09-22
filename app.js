@@ -47,12 +47,21 @@ const MINOR_ARCANA = MINOR_SUITS.flatMap((suit) =>
 
 const DECK = [...MAJOR_ARCANA, ...MINOR_ARCANA];
 
+const ORIENTATIONS = ["Upright", "Reversed"];
+
+function drawOrientation() {
+  return ORIENTATIONS[Math.floor(Math.random() * ORIENTATIONS.length)];
+}
+
 function drawThreeCards() {
   const indices = new Set();
   while (indices.size < 3) {
     indices.add(Math.floor(Math.random() * DECK.length));
   }
-  return [...indices].map((i) => DECK[i]);
+  return [...indices].map((i) => ({
+    name: DECK[i],
+    orientation: drawOrientation(),
+  }));
 }
 
 const form = document.getElementById("question-form");
@@ -75,9 +84,12 @@ const CARD_POSITIONS = ["Past", "Present", "Future"];
 
 function renderCards(cards) {
   cardList.innerHTML = "";
-  cards.forEach((cardName, index) => {
+  cards.forEach((card, index) => {
     const li = document.createElement("li");
     li.className = "tarot-card";
+    if (card.orientation === "Reversed") {
+      li.classList.add("reversed");
+    }
 
     const position = document.createElement("span");
     position.className = "card-position";
@@ -86,6 +98,9 @@ function renderCards(cards) {
     const face = document.createElement("div");
     face.className = "card-face";
 
+    const faceContent = document.createElement("div");
+    faceContent.className = "card-face-content";
+
     const glyph = document.createElement("span");
     glyph.className = "card-glyph";
     glyph.setAttribute("aria-hidden", "true");
@@ -93,12 +108,19 @@ function renderCards(cards) {
 
     const name = document.createElement("span");
     name.className = "card-name";
-    name.textContent = cardName;
+    name.textContent = card.name;
 
-    face.appendChild(glyph);
-    face.appendChild(name);
+    faceContent.appendChild(glyph);
+    faceContent.appendChild(name);
+    face.appendChild(faceContent);
+
+    const orientation = document.createElement("span");
+    orientation.className = "card-orientation";
+    orientation.textContent = card.orientation;
+
     li.appendChild(position);
     li.appendChild(face);
+    li.appendChild(orientation);
     cardList.appendChild(li);
   });
   resultsSection.hidden = false;
