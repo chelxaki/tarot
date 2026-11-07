@@ -1,20 +1,28 @@
 :root {
-  --color-bg: #fff8f0;
+  --color-bg: #fdf6ee;
+  --color-cream: #fffaf3;
   --color-lavender: #e9e2f9;
+  --color-lavender-soft: #f1ecfb;
   --color-blush: #fbe2e7;
+  --color-blush-soft: #fdedf0;
   --color-pale-blue: #dfeaf7;
-  --color-gold: #e3bf7f;
+  --color-pale-blue-soft: #ecf3fa;
+  --color-gold: #c9a15f;
+  --color-gold-soft: #f3d9a4;
   --color-dusty-purple: #a78bd9;
   --color-dusty-purple-light: #cdb8ef;
+  --color-ink: #3d3350;
   --color-text: #4a4458;
-  --color-text-soft: #837a94;
-  --color-card-bg: #ffffff;
+  --color-text-soft: #8a8098;
   --color-error: #c96b6b;
-  --shadow-soft: 0 8px 24px rgba(150, 130, 180, 0.14);
-  --shadow-gentle: 0 10px 30px rgba(167, 139, 217, 0.16);
+  --shadow-soft: 0 10px 28px rgba(150, 130, 180, 0.16);
+  --shadow-card: 0 20px 48px rgba(150, 120, 180, 0.2);
+  --shadow-gentle: 0 10px 30px rgba(167, 139, 217, 0.14);
   --radius-lg: 28px;
   --radius-xl: 34px;
   --radius-md: 18px;
+  --font-serif: ui-serif, "New York", Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --font-sans: -apple-system, "Segoe UI Rounded", "Segoe UI", system-ui, Roboto, sans-serif;
 }
 
 * {
@@ -24,18 +32,53 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: -apple-system, "Segoe UI Rounded", "Segoe UI", system-ui, Roboto, sans-serif;
+  font-family: var(--font-sans);
   color: var(--color-text);
   background:
-    radial-gradient(circle at 12% 8%, rgba(227, 191, 127, 0.16) 0%, transparent 40%),
-    radial-gradient(circle at 88% 15%, rgba(223, 234, 247, 0.55) 0%, transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(251, 226, 231, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 900px 500px at 8% 0%, rgba(227, 191, 127, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 800px 600px at 100% 10%, rgba(223, 234, 247, 0.6) 0%, transparent 55%),
+    radial-gradient(ellipse 900px 700px at 50% 105%, rgba(251, 226, 231, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 600px 500px at -5% 60%, rgba(233, 226, 249, 0.4) 0%, transparent 50%),
     var(--color-bg);
   display: flex;
   justify-content: center;
-  padding: 32px 16px 64px;
+  padding: 40px 20px 80px;
   position: relative;
   overflow-x: hidden;
+}
+
+/* Decorative arch panels from images/ui/, framing the functional content. */
+.side-decor {
+  position: fixed;
+  top: 0;
+  width: clamp(120px, 17vw, 230px);
+  height: min(780px, 86vh);
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.side-decor-left {
+  left: 0;
+  object-position: left 4%;
+}
+
+.side-decor-right {
+  right: 0;
+  object-position: top right;
+}
+
+@media (max-width: 1100px) {
+  .side-decor {
+    width: clamp(90px, 12vw, 160px);
+  }
+}
+
+@media (max-width: 760px) {
+  .side-decor {
+    display: none;
+  }
 }
 
 .celestial-decor {
@@ -52,153 +95,237 @@ body {
   user-select: none;
 }
 
-.decor-star-1 {
-  top: 6%;
-  left: 8%;
-  font-size: 1.1rem;
-}
-
-.decor-star-2 {
-  top: 14%;
-  right: 10%;
-  font-size: 0.8rem;
-  color: var(--color-dusty-purple);
-}
-
-.decor-star-3 {
-  top: 34%;
-  left: 4%;
-  font-size: 0.7rem;
-  opacity: 0.4;
-}
-
-.decor-moon {
-  top: 5%;
-  right: 18%;
-  font-size: 1.4rem;
-  color: var(--color-dusty-purple-light);
-  opacity: 0.45;
-}
-
-.decor-sparkle-1 {
-  bottom: 12%;
-  left: 12%;
-  font-size: 0.9rem;
-  color: var(--color-pale-blue);
-  opacity: 0.6;
-}
-
-.decor-sparkle-2 {
-  bottom: 20%;
-  right: 8%;
-  font-size: 1rem;
-  opacity: 0.4;
-}
+.decor-star-1 { top: 6%; left: 24%; font-size: 1.2rem; }
+.decor-star-2 { top: 12%; right: 24%; font-size: 0.85rem; color: var(--color-dusty-purple); }
+.decor-star-3 { top: 32%; left: 16%; font-size: 0.75rem; opacity: 0.4; }
+.decor-moon { top: 4%; right: 32%; font-size: 1.6rem; color: var(--color-dusty-purple-light); opacity: 0.45; }
+.decor-sparkle-1 { bottom: 14%; left: 20%; font-size: 1rem; color: var(--color-pale-blue); opacity: 0.6; }
+.decor-sparkle-2 { bottom: 22%; right: 18%; font-size: 1.1rem; opacity: 0.4; }
+.decor-moon-2 { top: 46%; right: 14%; font-size: 1rem; color: var(--color-gold); opacity: 0.35; }
+.decor-star-4 { bottom: 6%; right: 30%; font-size: 0.8rem; color: var(--color-dusty-purple-light); opacity: 0.5; }
+.decor-star-5 { top: 60%; left: 18%; font-size: 0.9rem; opacity: 0.4; }
 
 .app-shell {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 560px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  align-items: center;
+  gap: 44px;
+}
+
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+}
+
+.tagline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-lavender-soft);
+  color: var(--color-dusty-purple);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-gentle);
+}
+
+.pill-icon {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .tagline-pill {
+    display: none;
+  }
+}
+
+.content-narrow {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .app-header {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
 }
 
 .eyebrow {
   margin: 0;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--color-gold);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 4vw, 3rem);
   font-weight: 600;
-  color: var(--color-text);
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
 }
 
 .subtitle {
   margin: 0;
   color: var(--color-text-soft);
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .question-form {
-  background: var(--color-card-bg);
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(205, 184, 239, 0.35);
-  box-shadow: var(--shadow-gentle);
-  padding: 36px 32px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .question-form label {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  text-align: center;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 22px;
+  color: var(--color-gold);
+  font-size: 1rem;
+  pointer-events: none;
 }
 
 .question-form input[type="text"] {
+  width: 100%;
   font-family: inherit;
-  font-size: 1rem;
-  padding: 14px 18px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--color-lavender);
-  background: #fffdfb;
+  font-size: 1.08rem;
+  padding: 20px 26px 20px 46px;
+  border-radius: 22px;
+  border: 1.5px solid rgba(205, 184, 239, 0.55);
+  background: rgba(255, 253, 251, 0.85);
   color: var(--color-text);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-soft);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.question-form input[type="text"]::placeholder {
+  color: var(--color-text-soft);
+  opacity: 0.7;
 }
 
 .question-form input[type="text"]:focus {
   border-color: var(--color-gold);
-  box-shadow: 0 0 0 4px rgba(227, 191, 127, 0.18);
+  box-shadow: 0 0 0 5px rgba(227, 191, 127, 0.16), var(--shadow-soft);
 }
 
 .error-message {
   margin: 0;
   color: var(--color-error);
   font-size: 0.9rem;
+  text-align: center;
 }
 
 .draw-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   font-family: inherit;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #ffffff;
   background: linear-gradient(135deg, var(--color-dusty-purple-light), var(--color-dusty-purple));
   border: none;
-  border-radius: var(--radius-md);
-  padding: 14px 20px;
+  border-radius: 999px;
+  padding: 18px 28px;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(167, 139, 217, 0.35);
+  box-shadow: 0 10px 24px rgba(167, 139, 217, 0.38);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.btn-icon {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
 .draw-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(167, 139, 217, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(167, 139, 217, 0.46);
 }
 
 .draw-button:active {
   transform: translateY(0);
 }
 
+.tagline-divider {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  opacity: 0.85;
+}
+
 .results {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+}
+
+.results-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.results-divider .divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(227, 191, 127, 0.55), transparent);
+}
+
+.results-divider .divider-star {
+  color: var(--color-gold);
+  font-size: 0.95rem;
+  opacity: 0.85;
 }
 
 .card-list {
@@ -206,82 +333,104 @@ body {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
   width: 100%;
-  animation: fade-in 0.4s ease;
+  max-width: 960px;
+  animation: fade-in 0.45s ease;
 }
 
 .tarot-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .card-position {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-dusty-purple);
+  color: var(--color-gold);
 }
 
+/* Outer card frame. Holds .card-art (card-back.png, flipped 180deg when
+   reversed) and the name band below it. */
 .card-face {
   width: 100%;
-  aspect-ratio: 5 / 8;
-  background:
-    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.6) 0%, transparent 40%),
-    linear-gradient(165deg, var(--color-lavender) 0%, var(--color-blush) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  outline: 1px solid rgba(167, 139, 217, 0.22);
-  outline-offset: -6px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
-  padding: 14px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-face-content {
+  aspect-ratio: 2 / 3;
+  background: var(--color-cream);
+  border: 2px solid rgba(227, 191, 127, 0.55);
+  border-radius: 28px;
+  box-shadow: var(--shadow-card);
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 12px;
-  text-align: center;
 }
 
 .tarot-card.reversed .card-face {
-  background:
-    radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.5) 0%, transparent 40%),
-    linear-gradient(165deg, var(--color-blush) 0%, var(--color-lavender) 100%);
-  outline-color: rgba(199, 130, 149, 0.3);
+  border-color: rgba(199, 130, 149, 0.45);
 }
 
-.card-glyph {
-  font-size: 1.1rem;
-  color: var(--color-gold);
-  opacity: 0.85;
+.card-art {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  border: 1.5px solid rgba(227, 191, 127, 0.45);
+  background: var(--color-cream);
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.tarot-card.reversed .card-art {
+  transform: rotate(180deg);
+  border-color: rgba(199, 130, 149, 0.4);
+}
+
+.card-name-band {
+  padding: 10px 2px 2px;
+  text-align: center;
+  border-top: 1px solid rgba(201, 161, 95, 0.28);
 }
 
 .card-name {
+  font-family: var(--font-serif);
   font-weight: 600;
-  font-size: 0.92rem;
-  color: var(--color-text);
+  font-size: 1.15rem;
+  color: var(--color-ink);
   line-height: 1.3;
 }
 
 .card-orientation {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-text-soft);
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-dusty-purple);
+  background: var(--color-lavender-soft);
+  padding: 5px 16px;
+  border-radius: 999px;
 }
 
 .tarot-card.reversed .card-orientation {
   color: #b0708a;
+  background: var(--color-blush-soft);
+}
+
+.footer-tagline {
+  margin: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.75;
 }
 
 @keyframes fade-in {
@@ -295,28 +444,53 @@ body {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .card-list {
-    gap: 10px;
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 32px 16px 64px;
   }
 
-  .card-position {
-    font-size: 0.62rem;
+  .app-shell {
+    gap: 36px;
   }
 
-  .card-name {
-    font-size: 0.78rem;
+  .content-narrow {
+    gap: 26px;
   }
 
-  .card-glyph {
-    font-size: 0.9rem;
+  .brand {
+    font-size: 1.2rem;
   }
 
   .app-header h1 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
-  .question-form {
-    padding: 26px 20px;
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .question-form input[type="text"] {
+    padding: 16px 20px 16px 42px;
+    font-size: 1rem;
+  }
+
+  .draw-button {
+    padding: 16px 24px;
+  }
+
+  .card-list {
+    max-width: 260px;
+  }
+
+  .card-name {
+    font-size: 1rem;
   }
 }

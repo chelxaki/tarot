@@ -82,6 +82,13 @@ function clearError() {
 
 const CARD_POSITIONS = ["Past", "Present", "Future"];
 
+function slugifyCardName(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 function renderCards(cards) {
   cardList.innerHTML = "";
   cards.forEach((card, index) => {
@@ -98,21 +105,22 @@ function renderCards(cards) {
     const face = document.createElement("div");
     face.className = "card-face";
 
-    const faceContent = document.createElement("div");
-    faceContent.className = "card-face-content";
+    const art = document.createElement("img");
+    art.className = "card-art";
+    art.src = `images/cards/${slugifyCardName(card.name)}.jpg`;
+    art.alt = card.name;
+    art.loading = "lazy";
 
-    const glyph = document.createElement("span");
-    glyph.className = "card-glyph";
-    glyph.setAttribute("aria-hidden", "true");
-    glyph.textContent = "✦";
+    const nameBand = document.createElement("div");
+    nameBand.className = "card-name-band";
 
     const name = document.createElement("span");
     name.className = "card-name";
     name.textContent = card.name;
 
-    faceContent.appendChild(glyph);
-    faceContent.appendChild(name);
-    face.appendChild(faceContent);
+    nameBand.appendChild(name);
+    face.appendChild(art);
+    face.appendChild(nameBand);
 
     const orientation = document.createElement("span");
     orientation.className = "card-orientation";
